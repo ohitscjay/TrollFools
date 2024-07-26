@@ -59,6 +59,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		030DECFD2C53F04F00D5FEBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		0313B2A52C51AE4C000E5511 /* ar */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ar; sourceTree = "<group>"; };
 		03942CED2C51CAB90061A208 /* composedeb */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = composedeb; sourceTree = "<group>"; };
 		03942CEE2C51CAB90061A208 /* composedeb-15 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "composedeb-15"; sourceTree = "<group>"; };
@@ -191,6 +192,7 @@
 		CCF470582C4A4649008D8197 /* TrollFools */ = {
 			isa = PBXGroup;
 			children = (
+				030DECFD2C53F04F00D5FEBB /* Info.plist */,
 				CCF5A0A12C4D417F0097D48D /* main.swift */,
 				CCF470592C4A4649008D8197 /* TrollFoolsApp.swift */,
 				CCF4706D2C4A4BAB008D8197 /* AppListView.swift */,
@@ -481,12 +483,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 6LMF23FAGL;
 				ENABLE_PREVIEWS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TrollFools/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TrollFools;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -523,12 +527,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 6LMF23FAGL;
 				ENABLE_PREVIEWS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TrollFools/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TrollFools;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

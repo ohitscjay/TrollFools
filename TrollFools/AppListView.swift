@@ -316,6 +316,7 @@ struct AppListCell: View {
 
 struct AppListView: View {
     @StateObject var vm = AppListModel.shared
+    @State private var isUsingOfficialIcon = false
 
     var appNameString: String {
         Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "TrollFools"
@@ -430,6 +431,9 @@ struct AppListView: View {
                         vm.sortOrder = .descending
                         vm.performFilter()
                     }
+                    Button(action: toggleAppIcon) {
+                        Text(isUsingOfficialIcon ? NSLocalizedString("Switch to Default Icon", comment: "") : NSLocalizedString("Switch to Official Icon", comment: ""))
+                    }
                 } label: {
                     Image(systemName: "arrow.up.arrow.down.square")
                 }
@@ -452,8 +456,29 @@ struct AppListView: View {
         }
         .onAppear {
             vm.reload()
+            checkCurrentIcon()
         }
     }
+
+    private func toggleAppIcon() {
+        let newIcon = isUsingOfficialIcon ? nil : "AppIcon-official"
+
+        UIApplication.shared.setAlternateIconName(newIcon) { error in
+            if let error = error {
+                print("Failed to set icon: \(error)")
+            }
+        }
+        
+        isUsingOfficialIcon.toggle()
+    }
+
+    private func checkCurrentIcon() {
+        let currentIconName = UIApplication.shared.alternateIconName
+        DispatchQueue.main.async {
+            self.isUsingOfficialIcon = (currentIconName == "AppIcon-official")
+        }
+    }
+
 
     var body: some View {
         NavigationView {
@@ -474,7 +499,6 @@ struct AppListView: View {
                     .textInputAutocapitalization(.never)
                     .navigationTitle("Applications")
             } else {
-                // Fallback on earlier versions
                 appList
             }
         }
