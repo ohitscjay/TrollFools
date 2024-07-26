@@ -1,5 +1,7 @@
 # TrollFools
 
+huami：This is just unzipping the deb file to extract the dylib file and more analysis, please don't mislead, I don't want to explain too much
+
 In-place tweak injection with insert_dylib and ChOma.  
 Proudly written in SwiftUI.  
 
