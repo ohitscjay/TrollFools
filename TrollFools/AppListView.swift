@@ -421,6 +421,8 @@ struct AppListView: View {
 
     @State var isErrorOccurred: Bool = false
     @State var errorMessage: String = ""
+    @State private var showSearchBar = false
+    @State private var searchText: String = ""
 
     var appNameString: String {
         Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "TrollFools"
@@ -633,24 +635,39 @@ struct AppListView: View {
 
     var body: some View {
         NavigationView {
-            if #available(iOS 15.0, *) {
-                appList
-                    .refreshable {
-                        withAnimation {
-                            vm.reload()
+            VStack {
+                if #available(iOS 15.0, *) {
+                    appList
+                        .refreshable {
+                            withAnimation {
+                                vm.reload()
+                            }
                         }
-                    }
-                    .searchable(
-                        text: $vm.filter.searchKeyword,
-                        placement: .automatic,
-                        prompt: (vm.filter.showPatchedOnly
-                                 ? NSLocalizedString("Search Patched…", comment: "")
-                                 : NSLocalizedString("Search…", comment: ""))
-                    )
-                    .textInputAutocapitalization(.never)
-                    .navigationTitle("Applications")
-            } else {
-                appList
+                        .searchable(
+                            text: $vm.filter.searchKeyword,
+                            placement: .automatic,
+                            prompt: (vm.filter.showPatchedOnly
+                                     ? NSLocalizedString("Search Patched…", comment: "")
+                                     : NSLocalizedString("Search…", comment: ""))
+                        )
+                        .textInputAutocapitalization(.never)
+                        .navigationTitle("Applications")
+                } else {
+                    TextField(NSLocalizedString("Search...", comment: ""), text: $searchText)
+                        .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)
+                        .padding(.horizontal)
+
+                    appList
+                        .onAppear {
+                            vm.filter.searchKeyword = searchText
+                        }
+                        .onChange(of: searchText) { newValue in
+                            vm.filter.searchKeyword = newValue
+                            vm.performFilter()
+                        }
+                }
             }
         }
     }

@@ -18,6 +18,9 @@
 		03AADE192C5168EF00DCB836 /* libmd.0.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 03AADE0E2C5168B900DCB836 /* libmd.0.dylib */; };
 		03AADE1A2C5168EF00DCB836 /* libz-ng.2.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 03AADE092C5168B900DCB836 /* libz-ng.2.dylib */; };
 		03AADE1B2C5168EF00DCB836 /* libzstd.1.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 03AADE082C5168B900DCB836 /* libzstd.1.dylib */; };
+		03B9742B2C56659000C750AD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B9742A2C56659000C750AD /* SettingsView.swift */; };
+		03B9742E2C56720100C750AD /* mv in Resources */ = {isa = PBXBuildFile; fileRef = 03B9742C2C56720100C750AD /* mv */; };
+		03B9742F2C56720100C750AD /* mv-15 in Resources */ = {isa = PBXBuildFile; fileRef = 03B9742D2C56720100C750AD /* mv-15 */; };
 		CC1548C92C4A6B2100A4173E /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = CC1548C82C4A6B2100A4173E /* ZIPFoundation */; };
 		CC1548D12C4A6B8200A4173E /* ct_bypass in Resources */ = {isa = PBXBuildFile; fileRef = CC1548CF2C4A6B8200A4173E /* ct_bypass */; };
 		CC1548D32C4A743200A4173E /* SuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1548D22C4A743200A4173E /* SuccessView.swift */; };
@@ -71,6 +74,9 @@
 		03AADE0C2C5168B900DCB836 /* gzip */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = gzip; sourceTree = "<group>"; };
 		03AADE0D2C5168B900DCB836 /* liblzma.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = liblzma.5.dylib; sourceTree = "<group>"; };
 		03AADE0E2C5168B900DCB836 /* libmd.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmd.0.dylib; sourceTree = "<group>"; };
+		03B9742A2C56659000C750AD /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		03B9742C2C56720100C750AD /* mv */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = mv; sourceTree = "<group>"; };
+		03B9742D2C56720100C750AD /* mv-15 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "mv-15"; sourceTree = "<group>"; };
 		CC1548CF2C4A6B8200A4173E /* ct_bypass */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ct_bypass; sourceTree = "<group>"; };
 		CC1548D22C4A743200A4173E /* SuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessView.swift; sourceTree = "<group>"; };
 		CC1548D42C4A744300A4173E /* FailureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailureView.swift; sourceTree = "<group>"; };
@@ -131,6 +137,8 @@
 		CC15490F2C4B84DD00A4173E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				03B9742C2C56720100C750AD /* mv */,
+				03B9742D2C56720100C750AD /* mv-15 */,
 				03942CF12C51EC5B0061A208 /* lzma */,
 				03942CED2C51CAB90061A208 /* composedeb */,
 				03942CEE2C51CAB90061A208 /* composedeb-15 */,
@@ -199,6 +207,7 @@
 				CCB6A1182C4A58C7000D75B0 /* OptionView.swift */,
 				CCB6A11A2C4A6066000D75B0 /* InjectView.swift */,
 				CC15490D2C4B80AF00A4173E /* EjectListView.swift */,
+				03B9742A2C56659000C750AD /* SettingsView.swift */,
 				CC1548D22C4A743200A4173E /* SuccessView.swift */,
 				CC1548D42C4A744300A4173E /* FailureView.swift */,
 				CC1548D62C4A768700A4173E /* Injector.swift */,
@@ -312,9 +321,11 @@
 				03AADE132C5168B900DCB836 /* tar in Resources */,
 				CCC564ED2C4BE8470097C300 /* libplist-2.0.3.dylib in Resources */,
 				CC5E54BF2C4E131000FDE4A8 /* libxar.1.dylib in Resources */,
+				03B9742E2C56720100C750AD /* mv in Resources */,
 				CC61A87C2C4A677B003BD9A0 /* CydiaSubstrate.framework.zip in Resources */,
 				CCF4705E2C4A464B008D8197 /* Assets.xcassets in Resources */,
 				03942CF02C51CAB90061A208 /* composedeb-15 in Resources */,
+				03B9742F2C56720100C750AD /* mv-15 in Resources */,
 				CCF470692C4A4919008D8197 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -333,6 +344,7 @@
 				CC1548DB2C4A7C7000A4173E /* Execute.swift in Sources */,
 				CCF5A0A42C4D45160097D48D /* AuxiliaryExecute.swift in Sources */,
 				CCF4705A2C4A4649008D8197 /* TrollFoolsApp.swift in Sources */,
+				03B9742B2C56659000C750AD /* SettingsView.swift in Sources */,
 				CC1548D72C4A768700A4173E /* Injector.swift in Sources */,
 				CCB6A1192C4A58C7000D75B0 /* OptionView.swift in Sources */,
 				CCF5A0A22C4D417F0097D48D /* main.swift in Sources */,
@@ -486,7 +498,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 6LMF23FAGL;
 				ENABLE_PREVIEWS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -507,7 +519,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/TrollFools",
 				);
-				MARKETING_VERSION = 2.4;
+				MARKETING_VERSION = 2.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.huami.TrollFools;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -530,7 +542,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 6LMF23FAGL;
 				ENABLE_PREVIEWS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -551,7 +563,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/TrollFools",
 				);
-				MARKETING_VERSION = 2.4;
+				MARKETING_VERSION = 2.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.huami.TrollFools;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
