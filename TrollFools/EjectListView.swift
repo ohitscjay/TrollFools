@@ -209,17 +209,18 @@ struct EjectListView: View {
                         Text(NSLocalizedString("Some plug-ins were not injected by TrollFools, please eject them with caution.", comment: ""))
                             .font(.footnote)
                     }
-
-                    NavigationLink(isActive: $isErrorOccurred) {
-                        FailureView(title: NSLocalizedString("Error", comment: ""),
-                                    message: errorMessage)
-                    } label: { }
                 }
             }
         }
         .listStyle(.insetGrouped)
         .navigationTitle(NSLocalizedString("Plug-Ins", comment: ""))
         .animation(.easeOut, value: vm.filter.isSearching)
+        .background(Group {
+            NavigationLink(isActive: $isErrorOccurred) {
+                FailureView(title: NSLocalizedString("Error", comment: ""),
+                            message: errorMessage)
+            } label: { }
+        })
         .onViewWillAppear { viewController in
             viewControllerHost.viewController = viewController
         }
@@ -249,10 +250,10 @@ struct EjectListView: View {
         do {
             let plugInsToRemove = offsets.map { vm.filteredPlugIns[$0] }
             let plugInURLsToRemove = plugInsToRemove.map { $0.url }
-            let injector = try Injector(bundleURL: vm.app.url, teamID: vm.app.teamID)
+            let injector = try Injector(vm.app.url, appID: vm.app.id, teamID: vm.app.teamID)
             try injector.eject(plugInURLsToRemove)
 
-            vm.app.reloadInjectedStatus()
+            vm.app.reload()
             vm.reload()
         } catch {
             DDLogError("\(error)")
@@ -264,7 +265,7 @@ struct EjectListView: View {
 
     func deleteAll() {
         do {
-            let injector = try Injector(bundleURL: vm.app.url, teamID: vm.app.teamID)
+            let injector = try Injector(vm.app.url, appID: vm.app.id, teamID: vm.app.teamID)
 
             let view = viewControllerHost.viewController?
                 .navigationController?.view
@@ -279,7 +280,7 @@ struct EjectListView: View {
                 defer {
                     DispatchQueue.main.async {
                         withAnimation {
-                            vm.app.reloadInjectedStatus()
+                            vm.app.reload()
                             vm.reload()
                             isDeletingAll = false
                         }

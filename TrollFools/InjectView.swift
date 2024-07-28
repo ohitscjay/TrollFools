@@ -63,10 +63,7 @@ struct InjectView: View {
 
     func inject() -> Result<Void, Error> {
         do {
-            let injector = try Injector(
-                bundleURL: app.url,
-                teamID: app.teamID
-            )
+            let injector = try Injector(app.url, appID: app.id, teamID: app.teamID)
             try injector.inject(urlList)
             return .success(())
         } catch {
@@ -121,7 +118,7 @@ struct InjectView: View {
                 DispatchQueue.main.async {
                     withAnimation {
                         injectResult = result
-                        app.reloadInjectedStatus()
+                        app.reload()
                         viewControllerHost.viewController?.navigationController?
                             .view.isUserInteractionEnabled = true
                     }

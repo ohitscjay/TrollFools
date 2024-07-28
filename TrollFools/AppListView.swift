@@ -5,6 +5,7 @@
 //  Created by Lessica on 2024/7/19.
 //
 
+import CocoaLumberjackSwift
 import Combine
 import SwiftUI
 
@@ -16,6 +17,8 @@ final class App: Identifiable, ObservableObject {
     let url: URL
     let version: String?
 
+    @Published var isDetached: Bool = false
+    @Published var isAllowedToAttachOrDetach: Bool
     @Published var isInjected: Bool = false
 
     lazy var icon: UIImage? = UIImage._applicationIconImage(forBundleIdentifier: id, format: 0, scale: 3.0)
@@ -41,12 +44,24 @@ final class App: Identifiable, ObservableObject {
         self.teamID = teamID
         self.url = url
         self.version = version
-        self.isInjected = Injector.isInjectedBundle(url)
+        self.isDetached = Injector.isBundleDetached(url)
+        self.isAllowedToAttachOrDetach = type == "User" && Injector.isBundleAllowedToAttachOrDetach(url)
+        self.isInjected = Injector.isBundleInjected(url)
         self.alternateIcon = alternateIcon
     }
 
-    func reloadInjectedStatus() {
-        self.isInjected = Injector.isInjectedBundle(url)
+    func reload() {
+        reloadDetachedStatus()
+        reloadInjectedStatus()
+    }
+
+    private func reloadDetachedStatus() {
+        self.isDetached = Injector.isBundleDetached(url)
+        self.isAllowedToAttachOrDetach = isUser && Injector.isBundleAllowedToAttachOrDetach(url)
+    }
+
+    private func reloadInjectedStatus() {
+        self.isInjected = Injector.isBundleInjected(url)
     }
 }
 
@@ -57,6 +72,7 @@ enum SortOrder {
 
 final class AppListModel: ObservableObject {
     static let shared = AppListModel()
+    static let hasTrollStore: Bool = { LSApplicationProxy(forIdentifier: "com.opa334.TrollStore") != nil }()
     private var _allApplications: [App] = []
 
     @Published var filter = FilterOptions()
@@ -69,6 +85,9 @@ final class AppListModel: ObservableObject {
 
     @Published var isFilzaInstalled: Bool = false
     private let filzaURL = URL(string: "filza://")
+
+    @Published var isRebuildNeeded: Bool = false
+    @Published var isRebuilding: Bool = false
 
     private let applicationChanged = PassthroughSubject<Void, Never>()
     private var cancellables = Set<AnyCancellable>()
@@ -189,7 +208,7 @@ final class AppListModel: ObservableObject {
             }
 
         let filteredApps = allApps
-            .filter { $0.isSystem || Injector.isEligibleBundle($0.url) }
+            .filter { $0.isSystem || Injector.isBundleEligible($0.url) }
             .sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
 
         unsupportedCount = allApps.count - filteredApps.count
@@ -203,6 +222,11 @@ final class AppListModel: ObservableObject {
         }
         let fileURL = filzaURL.appendingPathComponent(url.path)
         UIApplication.shared.open(fileURL)
+    }
+
+    func rebuildIconCache() throws {
+        // Sadly, we can't call `trollstorehelper` directly because only TrollStore can launch it without error.
+        LSApplicationWorkspace.default().openApplication(withBundleID: "com.opa334.TrollStore")
     }
 }
 
@@ -242,6 +266,80 @@ struct AppListCell: View {
         return attributedString
     }
 
+    @ViewBuilder
+    var cellContextMenu: some View {
+        Button {
+            launch()
+        } label: {
+            Label(NSLocalizedString("Launch", comment: ""), systemImage: "command")
+        }
+
+        if isFilzaInstalled {
+            Button {
+                openInFilza()
+            } label: {
+                Label(NSLocalizedString("Show in Filza", comment: ""), systemImage: "scope")
+            }
+        }
+
+        if AppListModel.hasTrollStore && app.isAllowedToAttachOrDetach {
+            if app.isDetached {
+                Button {
+                    do {
+                        let injector = try Injector(app.url, appID: app.id, teamID: app.teamID)
+                        try injector.setDetached(false)
+                        withAnimation {
+                            app.reload()
+                            AppListModel.shared.isRebuildNeeded = true
+                        }
+                    } catch { DDLogError("\(error.localizedDescription)") }
+                } label: {
+                    Label(NSLocalizedString("Unlock Version", comment: ""), systemImage: "lock.open")
+                }
+            } else {
+                Button {
+                    do {
+                        let injector = try Injector(app.url, appID: app.id, teamID: app.teamID)
+                        try injector.setDetached(true)
+                        withAnimation {
+                            app.reload()
+                            AppListModel.shared.isRebuildNeeded = true
+                        }
+                    } catch { DDLogError("\(error.localizedDescription)") }
+                } label: {
+                    Label(NSLocalizedString("Lock Version", comment: ""), systemImage: "lock")
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    var cellContextMenuWrapper: some View {
+        if #available(iOS 16.0, *) {
+            // iOS 16
+            cellContextMenu
+        } else {
+            if #available(iOS 15.0, *) { }
+            else {
+                // iOS 14
+                cellContextMenu
+            }
+        }
+    }
+
+    @ViewBuilder
+    var cellBackground: some View {
+        if #available(iOS 15.0, *) {
+            if #available(iOS 16.0, *) { }
+            else {
+                // iOS 15
+                Color.clear
+                    .contextMenu { cellContextMenu }
+                    .id(app.isDetached)
+            }
+        }
+    }
+
     var body: some View {
         HStack(spacing: 12) {
             Image(uiImage: app.alternateIcon ?? app.icon ?? UIImage())
@@ -271,40 +369,43 @@ struct AppListCell: View {
                 if #available(iOS 15.0, *) {
                     Text(highlightedId)
                         .font(.subheadline)
+                        .lineLimit(1)
                 } else {
                     Text(app.id)
                         .font(.subheadline)
+                        .lineLimit(1)
                 }
             }
 
             Spacer()
 
             if let version = app.version {
-                Text(version)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-            }
-        }
-        .contextMenu {
-            Button {
-                launch()
-            } label: {
-                Label(NSLocalizedString("Launch", comment: ""), systemImage: "command")
-            }
+                if app.isUser && app.isDetached {
+                    HStack(spacing: 4) {
+                        Image(systemName: "lock")
+                            .font(.subheadline)
+                            .foregroundColor(.red)
+                            .accessibilityLabel(NSLocalizedString("Pinned Version", comment: ""))
 
-            if isFilzaInstalled {
-                Button {
-                    openInFilza()
-                } label: {
-                    Label(NSLocalizedString("Show in Filza", comment: ""), systemImage: "scope")
+                        Text(version)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                            .lineLimit(1)
+                    }
+                } else {
+                    Text(version)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        .lineLimit(1)
                 }
             }
         }
+        .contextMenu { cellContextMenuWrapper }
+        .background(cellBackground)
     }
 
     private func launch() {
-        LSApplicationWorkspace.default()
-            .openApplication(withBundleID: app.id)
+        LSApplicationWorkspace.default().openApplication(withBundleID: app.id)
     }
 
     var isFilzaInstalled: Bool { AppListModel.shared.isFilzaInstalled }
@@ -317,6 +418,9 @@ struct AppListCell: View {
 struct AppListView: View {
     @StateObject var vm = AppListModel.shared
     @State private var isUsingOfficialIcon = false
+
+    @State var isErrorOccurred: Bool = false
+    @State var errorMessage: String = ""
 
     var appNameString: String {
         Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "TrollFools"
@@ -375,6 +479,47 @@ struct AppListView: View {
 
     var appList: some View {
         List {
+            if AppListModel.hasTrollStore && vm.isRebuildNeeded {
+                Section {
+                    Button {
+                        rebuildIconCache()
+                    } label: {
+                        HStack {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(NSLocalizedString("Rebuild Icon Cache", comment: ""))
+                                    .font(.headline)
+                                    .foregroundColor(.primary)
+
+                                Text(NSLocalizedString("You need to rebuild the icon cache in TrollStore to apply changes.", comment: ""))
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                            }
+
+                            Spacer()
+
+                            if vm.isRebuilding {
+                                if #available(iOS 16.0, *) {
+                                    ProgressView()
+                                        .progressViewStyle(CircularProgressViewStyle())
+                                        .controlSize(.large)
+                                } else {
+                                    // Fallback on earlier versions
+                                    ProgressView()
+                                        .progressViewStyle(CircularProgressViewStyle())
+                                        .scaleEffect(2.0)
+                                }
+                            } else {
+                                Image(systemName: "timelapse")
+                                    .font(.title)
+                                    .foregroundColor(.accentColor)
+                            }
+                        }
+                        .padding(.vertical, 4)
+                    }
+                    .disabled(vm.isRebuilding)
+                }
+            }
+
             Section {
                 filteredAppList(vm.userApplications)
             } header: {
@@ -420,6 +565,12 @@ struct AppListView: View {
         }
         .listStyle(.insetGrouped)
         .navigationTitle(NSLocalizedString("TrollFools", comment: ""))
+        .background(Group {
+            NavigationLink(isActive: $isErrorOccurred) {
+                FailureView(title: NSLocalizedString("Error", comment: ""),
+                            message: errorMessage)
+            } label: { }
+        })
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Menu {
@@ -500,6 +651,39 @@ struct AppListView: View {
                     .navigationTitle("Applications")
             } else {
                 appList
+            }
+        }
+    }
+
+    private func rebuildIconCache() {
+        withAnimation {
+            vm.isRebuilding = true
+        }
+
+        DispatchQueue.global(qos: .userInteractive).async {
+            defer {
+                DispatchQueue.main.async {
+                    withAnimation {
+                        vm.isRebuilding = false
+                    }
+                }
+            }
+
+            do {
+                try vm.rebuildIconCache()
+
+                DispatchQueue.main.async {
+                    withAnimation {
+                        vm.isRebuildNeeded = false
+                    }
+                }
+            } catch {
+                DDLogError("\(error.localizedDescription)")
+
+                DispatchQueue.main.async {
+                    errorMessage = error.localizedDescription
+                    isErrorOccurred = true
+                }
             }
         }
     }
