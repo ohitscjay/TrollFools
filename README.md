@@ -1,9 +1,5 @@
 # TrollFools
 
-## 此储存库新增的功能是deb解压并非像越狱一般注入，为避免导致误会，储存库将归档
-
-## The new feature of this repository is that deb extraction is not like jailbreak injection. To avoid misunderstanding, the repository will be archived
-
 In-place tweak injection with insert_dylib and ChOma.  
 Proudly written in SwiftUI.  
 
