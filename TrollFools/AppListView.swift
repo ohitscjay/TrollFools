@@ -169,8 +169,7 @@ final class AppListModel: ObservableObject {
                       let url = proxy.bundleURL(),
                       let teamID = proxy.teamID(),
                       let appType = proxy.applicationType(),
-                      let localizedName = proxy.localizedName(),
-                      let shortVersionString = proxy.shortVersionString()
+                      let localizedName = proxy.localizedName()
                 else {
                     return nil
                 }
@@ -187,6 +186,7 @@ final class AppListModel: ObservableObject {
                     return nil
                 }
 
+                let shortVersionString: String? = proxy.shortVersionString()
                 let app = App(
                     id: id,
                     name: localizedName,
@@ -421,8 +421,6 @@ struct AppListView: View {
 
     @State var isErrorOccurred: Bool = false
     @State var errorMessage: String = ""
-    @State private var showSearchBar = false
-    @State private var searchText: String = ""
 
     var appNameString: String {
         Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "TrollFools"
@@ -436,12 +434,13 @@ struct AppListView: View {
 
     var appString: String {
         String(format: """
-%@ %@ %@ © 2024
-%@
-%@
-""", appNameString, appVersionString, NSLocalizedString("Copyright", comment: ""), NSLocalizedString("Lessica, Lakr233, mlgm and other contributors.", comment: ""),
+    %@ %@ %@ © 2024
+    %@
+    %@
+    """, appNameString, appVersionString, NSLocalizedString("Copyright", comment: ""), NSLocalizedString("Lessica, Lakr233, mlgm and other contributors.", comment: ""),
                NSLocalizedString("huami Add some features", comment: ""))
     }
+
 
     let repoURL = URL(string: "https://github.com/Lessica/TrollFools")
 
@@ -632,42 +631,26 @@ struct AppListView: View {
         }
     }
 
-
     var body: some View {
         NavigationView {
-            VStack {
-                if #available(iOS 15.0, *) {
-                    appList
-                        .refreshable {
-                            withAnimation {
-                                vm.reload()
-                            }
+            if #available(iOS 15.0, *) {
+                appList
+                    .refreshable {
+                        withAnimation {
+                            vm.reload()
                         }
-                        .searchable(
-                            text: $vm.filter.searchKeyword,
-                            placement: .automatic,
-                            prompt: (vm.filter.showPatchedOnly
-                                     ? NSLocalizedString("Search Patched…", comment: "")
-                                     : NSLocalizedString("Search…", comment: ""))
-                        )
-                        .textInputAutocapitalization(.never)
-                        .navigationTitle("Applications")
-                } else {
-                    TextField(NSLocalizedString("Search...", comment: ""), text: $searchText)
-                        .padding()
-                        .background(Color(.systemGray6))
-                        .cornerRadius(8)
-                        .padding(.horizontal)
-
-                    appList
-                        .onAppear {
-                            vm.filter.searchKeyword = searchText
-                        }
-                        .onChange(of: searchText) { newValue in
-                            vm.filter.searchKeyword = newValue
-                            vm.performFilter()
-                        }
-                }
+                    }
+                    .searchable(
+                        text: $vm.filter.searchKeyword,
+                        placement: .automatic,
+                        prompt: (vm.filter.showPatchedOnly
+                                 ? NSLocalizedString("Search Patched…", comment: "")
+                                 : NSLocalizedString("Search…", comment: ""))
+                    )
+                    .textInputAutocapitalization(.never)
+            } else {
+                // Fallback on earlier versions
+                appList
             }
         }
     }

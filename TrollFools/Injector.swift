@@ -407,10 +407,6 @@ final class Injector {
 
     private lazy var optoolBinaryURL: URL = Bundle.main.url(forResource: "optool", withExtension: nil)!
     private lazy var rmBinaryURL: URL = Bundle.main.url(forResource: "rm", withExtension: nil)!
-    private lazy var dpkgBinaryURL: URL = Bundle.main.url(forResource: "dpkg-deb", withExtension: nil)!
-//    private lazy var arBinaryURL: URL = Bundle.main.url(forResource: "ar", withExtension: nil)!
-
-
 
     private func backup(_ url: URL) throws {
         let backupURL = url.appendingPathExtension("troll-fools.bak")
@@ -725,10 +721,12 @@ final class Injector {
 
         let dylibs = try loadedDylibs(mainURL)
         for dylib in dylibs {
-            guard (dylib.hasSuffix("/CydiaSubstrate") ||
-                   dylib.hasSuffix("/libsubstrate.dylib") ||
-                   dylib.hasSuffix("/libsubstitute.dylib") ||
-                   dylib.hasSuffix("/libellekit.dylib"))
+            let lowercasedDylib = dylib.lowercased()
+            guard (lowercasedDylib.hasSuffix("/cydiasubstrate") ||
+                   lowercasedDylib.hasSuffix("/libsubstrate.dylib") ||
+                   lowercasedDylib.hasSuffix("/libsubstitute.dylib") ||
+                   lowercasedDylib.hasSuffix("/ellekit") ||
+                   lowercasedDylib.hasSuffix("/libellekit.dylib"))
             else {
                 continue
             }
@@ -809,7 +807,6 @@ final class Injector {
 
         return finalURLs
     }
-
     private func decomposeDeb(at sourceURL: URL, to destinationURL: URL) throws -> String {
         let composedebPath = Bundle.main.url(forResource: "composedeb", withExtension: nil)!.path
         let executablePath = (composedebPath as NSString).deletingLastPathComponent
@@ -868,9 +865,6 @@ final class Injector {
             throw error
         }
     }
-
-
-    
     // MARK: - Public Methods
 
     func inject(_ injectURLs: [URL]) throws {
@@ -879,6 +873,7 @@ final class Injector {
         TFUtilKillAll(mainExecutableURL.lastPathComponent, true)
 
         let shouldBackup = !hasInjectedPlugIn
+
         try _injectBundles(urlsToInject
             .filter { $0.pathExtension.lowercased() == "bundle" })
 
