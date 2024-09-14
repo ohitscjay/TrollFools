@@ -7,21 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0313B2A62C51AE4C000E5511 /* ar in Resources */ = {isa = PBXBuildFile; fileRef = 0313B2A52C51AE4C000E5511 /* ar */; };
-		03942CEF2C51CAB90061A208 /* composedeb in Resources */ = {isa = PBXBuildFile; fileRef = 03942CED2C51CAB90061A208 /* composedeb */; };
-		03942CF02C51CAB90061A208 /* composedeb-15 in Resources */ = {isa = PBXBuildFile; fileRef = 03942CEE2C51CAB90061A208 /* composedeb-15 */; };
-		03942CF22C51EC5B0061A208 /* lzma in Resources */ = {isa = PBXBuildFile; fileRef = 03942CF12C51EC5B0061A208 /* lzma */; };
-		03AADE122C5168B900DCB836 /* xz in Resources */ = {isa = PBXBuildFile; fileRef = 03AADE0A2C5168B900DCB836 /* xz */; };
-		03AADE132C5168B900DCB836 /* tar in Resources */ = {isa = PBXBuildFile; fileRef = 03AADE0B2C5168B900DCB836 /* tar */; };
-		03AADE142C5168B900DCB836 /* gzip in Resources */ = {isa = PBXBuildFile; fileRef = 03AADE0C2C5168B900DCB836 /* gzip */; };
-		03AADE182C5168EF00DCB836 /* liblzma.5.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 03AADE0D2C5168B900DCB836 /* liblzma.5.dylib */; };
-		03AADE192C5168EF00DCB836 /* libmd.0.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 03AADE0E2C5168B900DCB836 /* libmd.0.dylib */; };
-		03AADE1A2C5168EF00DCB836 /* libz-ng.2.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 03AADE092C5168B900DCB836 /* libz-ng.2.dylib */; };
-		03AADE1B2C5168EF00DCB836 /* libzstd.1.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 03AADE082C5168B900DCB836 /* libzstd.1.dylib */; };
-		03B9742B2C56659000C750AD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B9742A2C56659000C750AD /* SettingsView.swift */; };
-		03B9742E2C56720100C750AD /* mv in Resources */ = {isa = PBXBuildFile; fileRef = 03B9742C2C56720100C750AD /* mv */; };
-		03B9742F2C56720100C750AD /* mv-15 in Resources */ = {isa = PBXBuildFile; fileRef = 03B9742D2C56720100C750AD /* mv-15 */; };
-		CC1548C92C4A6B2100A4173E /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = CC1548C82C4A6B2100A4173E /* ZIPFoundation */; };
+		03375E382C959D8B0024C95D /* MachOKit in Frameworks */ = {isa = PBXBuildFile; productRef = 03375E372C959D8B0024C95D /* MachOKit */; };
+		03375E3A2C959D8B0024C95D /* MachOKitC in Frameworks */ = {isa = PBXBuildFile; productRef = 03375E392C959D8B0024C95D /* MachOKitC */; };
+		03375E3F2C959ECE0024C95D /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 03375E3E2C959ECE0024C95D /* ZIPFoundation */; };
+		03375E422C959F1A0024C95D /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = 03375E412C959F1A0024C95D /* CocoaLumberjack */; };
+		03375E442C959F1A0024C95D /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 03375E432C959F1A0024C95D /* CocoaLumberjackSwift */; };
+		03375E462C959F1A0024C95D /* CocoaLumberjackSwiftLogBackend in Frameworks */ = {isa = PBXBuildFile; productRef = 03375E452C959F1A0024C95D /* CocoaLumberjackSwiftLogBackend */; };
+		03375E492C95A0BB0024C95D /* composedeb-15 in Resources */ = {isa = PBXBuildFile; fileRef = 03375E472C95A0BB0024C95D /* composedeb-15 */; };
+		03375E4A2C95A0BB0024C95D /* composedeb in Resources */ = {isa = PBXBuildFile; fileRef = 03375E482C95A0BB0024C95D /* composedeb */; };
+		03375E502C95A1160024C95D /* ar in Resources */ = {isa = PBXBuildFile; fileRef = 03375E4B2C95A1160024C95D /* ar */; };
+		03375E512C95A1160024C95D /* tar in Resources */ = {isa = PBXBuildFile; fileRef = 03375E4C2C95A1160024C95D /* tar */; };
+		03375E522C95A1160024C95D /* xz in Resources */ = {isa = PBXBuildFile; fileRef = 03375E4D2C95A1160024C95D /* xz */; };
+		03375E532C95A1160024C95D /* gzip in Resources */ = {isa = PBXBuildFile; fileRef = 03375E4E2C95A1160024C95D /* gzip */; };
+		03375E542C95A1160024C95D /* lzma in Resources */ = {isa = PBXBuildFile; fileRef = 03375E4F2C95A1160024C95D /* lzma */; };
+		03375E5D2C95A19A0024C95D /* liblzma.5.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 03375E582C95A1850024C95D /* liblzma.5.dylib */; };
+		03375E5E2C95A19A0024C95D /* libmd.0.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 03375E552C95A1850024C95D /* libmd.0.dylib */; };
+		03375E5F2C95A19A0024C95D /* libz-ng.2.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 03375E562C95A1850024C95D /* libz-ng.2.dylib */; };
+		03375E602C95A19A0024C95D /* libzstd.1.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 03375E572C95A1850024C95D /* libzstd.1.dylib */; };
+		CC0E80FB2C54F84000B137B4 /* mv-15 in Resources */ = {isa = PBXBuildFile; fileRef = CC0E80FA2C54F84000B137B4 /* mv-15 */; };
 		CC1548D12C4A6B8200A4173E /* ct_bypass in Resources */ = {isa = PBXBuildFile; fileRef = CC1548CF2C4A6B8200A4173E /* ct_bypass */; };
 		CC1548D32C4A743200A4173E /* SuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1548D22C4A743200A4173E /* SuccessView.swift */; };
 		CC1548D52C4A744300A4173E /* FailureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1548D42C4A744300A4173E /* FailureView.swift */; };
@@ -31,12 +34,13 @@
 		CC1548E12C4A963500A4173E /* cp in Resources */ = {isa = PBXBuildFile; fileRef = CC1548E02C4A963500A4173E /* cp */; };
 		CC1548E62C4A974E00A4173E /* libintl.8.dylib in Resources */ = {isa = PBXBuildFile; fileRef = CC1548E22C4A974400A4173E /* libintl.8.dylib */; };
 		CC1548E72C4A974E00A4173E /* libiosexec.1.dylib in Resources */ = {isa = PBXBuildFile; fileRef = CC1548E32C4A974400A4173E /* libiosexec.1.dylib */; };
-		CC1548FC2C4AADBB00A4173E /* MachOKit in Frameworks */ = {isa = PBXBuildFile; productRef = CC1548FB2C4AADBB00A4173E /* MachOKit */; };
-		CC1548FE2C4AADBB00A4173E /* MachOKitC in Frameworks */ = {isa = PBXBuildFile; productRef = CC1548FD2C4AADBB00A4173E /* MachOKitC */; };
 		CC1549002C4AB43600A4173E /* rm in Resources */ = {isa = PBXBuildFile; fileRef = CC1548FF2C4AB43600A4173E /* rm */; };
 		CC1549022C4B62E300A4173E /* cp-15 in Resources */ = {isa = PBXBuildFile; fileRef = CC1549012C4B62E300A4173E /* cp-15 */; };
 		CC15490C2C4B79D800A4173E /* optool in Resources */ = {isa = PBXBuildFile; fileRef = CC15490B2C4B79D800A4173E /* optool */; };
 		CC15490E2C4B80AF00A4173E /* EjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC15490D2C4B80AF00A4173E /* EjectListView.swift */; };
+		CC19E4BB2C561D7300E0F1B5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC19E4BA2C561D7300E0F1B5 /* SettingsView.swift */; };
+		CC3485172C71B219007E0E28 /* Version.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = CC3485152C71B219007E0E28 /* Version.xcconfig */; };
+		CC3485182C71B219007E0E28 /* Version.Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = CC3485162C71B219007E0E28 /* Version.Debug.xcconfig */; };
 		CC5E54BE2C4E12F900FDE4A8 /* install_name_tool in Resources */ = {isa = PBXBuildFile; fileRef = CC5E54BC2C4E12F900FDE4A8 /* install_name_tool */; };
 		CC5E54BF2C4E131000FDE4A8 /* libxar.1.dylib in Resources */ = {isa = PBXBuildFile; fileRef = CC5E54BB2C4E12F900FDE4A8 /* libxar.1.dylib */; };
 		CC61A87C2C4A677B003BD9A0 /* CydiaSubstrate.framework.zip in Resources */ = {isa = PBXBuildFile; fileRef = CC61A87B2C4A677B003BD9A0 /* CydiaSubstrate.framework.zip */; };
@@ -46,14 +50,12 @@
 		CCC564EB2C4BE8320097C300 /* ldid in Resources */ = {isa = PBXBuildFile; fileRef = CCC564E82C4BE8320097C300 /* ldid */; };
 		CCC564EC2C4BE8470097C300 /* libcrypto.3.dylib in Resources */ = {isa = PBXBuildFile; fileRef = CCC564E62C4BE8320097C300 /* libcrypto.3.dylib */; };
 		CCC564ED2C4BE8470097C300 /* libplist-2.0.3.dylib in Resources */ = {isa = PBXBuildFile; fileRef = CCC564E72C4BE8320097C300 /* libplist-2.0.3.dylib */; };
+		CCECB7CE2C54DC660094C8E6 /* mv in Resources */ = {isa = PBXBuildFile; fileRef = CCECB7CD2C54DC660094C8E6 /* mv */; };
 		CCF4705A2C4A4649008D8197 /* TrollFoolsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF470592C4A4649008D8197 /* TrollFoolsApp.swift */; };
 		CCF4705E2C4A464B008D8197 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCF4705D2C4A464B008D8197 /* Assets.xcassets */; };
 		CCF470692C4A4919008D8197 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CCF4706B2C4A4919008D8197 /* Localizable.strings */; };
 		CCF4706E2C4A4BAB008D8197 /* AppListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF4706D2C4A4BAB008D8197 /* AppListView.swift */; };
 		CCF470732C4A4E81008D8197 /* TrollFoolsStub.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF470722C4A4E81008D8197 /* TrollFoolsStub.m */; };
-		CCF5A09C2C4D40830097D48D /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = CCF5A09B2C4D40830097D48D /* CocoaLumberjack */; };
-		CCF5A09E2C4D40830097D48D /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CCF5A09D2C4D40830097D48D /* CocoaLumberjackSwift */; };
-		CCF5A0A02C4D40830097D48D /* CocoaLumberjackSwiftLogBackend in Frameworks */ = {isa = PBXBuildFile; productRef = CCF5A09F2C4D40830097D48D /* CocoaLumberjackSwiftLogBackend */; };
 		CCF5A0A22C4D417F0097D48D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF5A0A12C4D417F0097D48D /* main.swift */; };
 		CCF5A0A42C4D45160097D48D /* AuxiliaryExecute.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF5A0A32C4D45160097D48D /* AuxiliaryExecute.swift */; };
 		CCF5A0A62C4D45400097D48D /* AuxiliaryExecute+Spawn.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF5A0A52C4D45400097D48D /* AuxiliaryExecute+Spawn.swift */; };
@@ -62,21 +64,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		030DECFD2C53F04F00D5FEBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		0313B2A52C51AE4C000E5511 /* ar */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ar; sourceTree = "<group>"; };
-		03942CED2C51CAB90061A208 /* composedeb */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = composedeb; sourceTree = "<group>"; };
-		03942CEE2C51CAB90061A208 /* composedeb-15 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "composedeb-15"; sourceTree = "<group>"; };
-		03942CF12C51EC5B0061A208 /* lzma */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = lzma; sourceTree = "<group>"; };
-		03AADE082C5168B900DCB836 /* libzstd.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libzstd.1.dylib; sourceTree = "<group>"; };
-		03AADE092C5168B900DCB836 /* libz-ng.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "libz-ng.2.dylib"; sourceTree = "<group>"; };
-		03AADE0A2C5168B900DCB836 /* xz */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = xz; sourceTree = "<group>"; };
-		03AADE0B2C5168B900DCB836 /* tar */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = tar; sourceTree = "<group>"; };
-		03AADE0C2C5168B900DCB836 /* gzip */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = gzip; sourceTree = "<group>"; };
-		03AADE0D2C5168B900DCB836 /* liblzma.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = liblzma.5.dylib; sourceTree = "<group>"; };
-		03AADE0E2C5168B900DCB836 /* libmd.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmd.0.dylib; sourceTree = "<group>"; };
-		03B9742A2C56659000C750AD /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		03B9742C2C56720100C750AD /* mv */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = mv; sourceTree = "<group>"; };
-		03B9742D2C56720100C750AD /* mv-15 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "mv-15"; sourceTree = "<group>"; };
+		03375E472C95A0BB0024C95D /* composedeb-15 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "composedeb-15"; sourceTree = "<group>"; };
+		03375E482C95A0BB0024C95D /* composedeb */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = composedeb; sourceTree = "<group>"; };
+		03375E4B2C95A1160024C95D /* ar */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ar; sourceTree = "<group>"; };
+		03375E4C2C95A1160024C95D /* tar */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = tar; sourceTree = "<group>"; };
+		03375E4D2C95A1160024C95D /* xz */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = xz; sourceTree = "<group>"; };
+		03375E4E2C95A1160024C95D /* gzip */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = gzip; sourceTree = "<group>"; };
+		03375E4F2C95A1160024C95D /* lzma */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = lzma; sourceTree = "<group>"; };
+		03375E552C95A1850024C95D /* libmd.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmd.0.dylib; sourceTree = "<group>"; };
+		03375E562C95A1850024C95D /* libz-ng.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "libz-ng.2.dylib"; sourceTree = "<group>"; };
+		03375E572C95A1850024C95D /* libzstd.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libzstd.1.dylib; sourceTree = "<group>"; };
+		03375E582C95A1850024C95D /* liblzma.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = liblzma.5.dylib; sourceTree = "<group>"; };
+		03375E612C95ACA70024C95D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CC0E80FA2C54F84000B137B4 /* mv-15 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "mv-15"; sourceTree = "<group>"; };
 		CC1548CF2C4A6B8200A4173E /* ct_bypass */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ct_bypass; sourceTree = "<group>"; };
 		CC1548D22C4A743200A4173E /* SuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessView.swift; sourceTree = "<group>"; };
 		CC1548D42C4A744300A4173E /* FailureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailureView.swift; sourceTree = "<group>"; };
@@ -90,6 +90,10 @@
 		CC1549012C4B62E300A4173E /* cp-15 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "cp-15"; sourceTree = "<group>"; };
 		CC15490B2C4B79D800A4173E /* optool */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = optool; sourceTree = "<group>"; };
 		CC15490D2C4B80AF00A4173E /* EjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EjectListView.swift; sourceTree = "<group>"; };
+		CC19E4BA2C561D7300E0F1B5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		CC3485142C71B219007E0E28 /* TrollFools.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = TrollFools.entitlements; sourceTree = "<group>"; };
+		CC3485152C71B219007E0E28 /* Version.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Version.xcconfig; sourceTree = "<group>"; };
+		CC3485162C71B219007E0E28 /* Version.Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Version.Debug.xcconfig; sourceTree = "<group>"; };
 		CC5E54BB2C4E12F900FDE4A8 /* libxar.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libxar.1.dylib; sourceTree = "<group>"; };
 		CC5E54BC2C4E12F900FDE4A8 /* install_name_tool */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = install_name_tool; sourceTree = "<group>"; };
 		CC61A87B2C4A677B003BD9A0 /* CydiaSubstrate.framework.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = CydiaSubstrate.framework.zip; sourceTree = "<group>"; };
@@ -99,6 +103,7 @@
 		CCC564E62C4BE8320097C300 /* libcrypto.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libcrypto.3.dylib; sourceTree = "<group>"; };
 		CCC564E72C4BE8320097C300 /* libplist-2.0.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "libplist-2.0.3.dylib"; sourceTree = "<group>"; };
 		CCC564E82C4BE8320097C300 /* ldid */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ldid; sourceTree = "<group>"; };
+		CCECB7CD2C54DC660094C8E6 /* mv */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = mv; sourceTree = "<group>"; };
 		CCF470562C4A4649008D8197 /* TrollFools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrollFools.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCF470592C4A4649008D8197 /* TrollFoolsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrollFoolsApp.swift; sourceTree = "<group>"; };
 		CCF4705D2C4A464B008D8197 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -121,13 +126,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03375E382C959D8B0024C95D /* MachOKit in Frameworks */,
+				03375E3A2C959D8B0024C95D /* MachOKitC in Frameworks */,
+				03375E442C959F1A0024C95D /* CocoaLumberjackSwift in Frameworks */,
+				03375E462C959F1A0024C95D /* CocoaLumberjackSwiftLogBackend in Frameworks */,
 				CCB6A1172C4A540F000D75B0 /* CoreServices.framework in Frameworks */,
-				CC1548FE2C4AADBB00A4173E /* MachOKitC in Frameworks */,
-				CCF5A09E2C4D40830097D48D /* CocoaLumberjackSwift in Frameworks */,
-				CCF5A0A02C4D40830097D48D /* CocoaLumberjackSwiftLogBackend in Frameworks */,
-				CC1548FC2C4AADBB00A4173E /* MachOKit in Frameworks */,
-				CCF5A09C2C4D40830097D48D /* CocoaLumberjack in Frameworks */,
-				CC1548C92C4A6B2100A4173E /* ZIPFoundation in Frameworks */,
+				03375E422C959F1A0024C95D /* CocoaLumberjack in Frameworks */,
+				03375E3F2C959ECE0024C95D /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,37 +142,40 @@
 		CC15490F2C4B84DD00A4173E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				03B9742C2C56720100C750AD /* mv */,
-				03B9742D2C56720100C750AD /* mv-15 */,
-				03942CF12C51EC5B0061A208 /* lzma */,
-				03942CED2C51CAB90061A208 /* composedeb */,
-				03942CEE2C51CAB90061A208 /* composedeb-15 */,
-				0313B2A52C51AE4C000E5511 /* ar */,
 				CCF4705D2C4A464B008D8197 /* Assets.xcassets */,
 				CC61A87B2C4A677B003BD9A0 /* CydiaSubstrate.framework.zip */,
+				03375E4B2C95A1160024C95D /* ar */,
+				03375E4E2C95A1160024C95D /* gzip */,
+				03375E4F2C95A1160024C95D /* lzma */,
+				03375E4C2C95A1160024C95D /* tar */,
+				03375E4D2C95A1160024C95D /* xz */,
 				CCF925432C4CE47800880D48 /* chown */,
-				03AADE0C2C5168B900DCB836 /* gzip */,
-				03AADE0B2C5168B900DCB836 /* tar */,
-				03AADE0A2C5168B900DCB836 /* xz */,
 				CC1548E02C4A963500A4173E /* cp */,
 				CC1549012C4B62E300A4173E /* cp-15 */,
+				03375E482C95A0BB0024C95D /* composedeb */,
+				03375E472C95A0BB0024C95D /* composedeb-15 */,
 				CC1548CF2C4A6B8200A4173E /* ct_bypass */,
 				CC1548DC2C4A8DC500A4173E /* insert_dylib */,
 				CC5E54BC2C4E12F900FDE4A8 /* install_name_tool */,
 				CCC564E82C4BE8320097C300 /* ldid */,
 				CCFC78632C4E853D008EB25D /* mkdir */,
+				CCECB7CD2C54DC660094C8E6 /* mv */,
+				CC0E80FA2C54F84000B137B4 /* mv-15 */,
 				CC15490B2C4B79D800A4173E /* optool */,
 				CC1548FF2C4AB43600A4173E /* rm */,
+				03375E582C95A1850024C95D /* liblzma.5.dylib */,
+				03375E552C95A1850024C95D /* libmd.0.dylib */,
+				03375E562C95A1850024C95D /* libz-ng.2.dylib */,
+				03375E572C95A1850024C95D /* libzstd.1.dylib */,
 				CCC564E62C4BE8320097C300 /* libcrypto.3.dylib */,
 				CC1548E22C4A974400A4173E /* libintl.8.dylib */,
 				CC1548E32C4A974400A4173E /* libiosexec.1.dylib */,
 				CCC564E72C4BE8320097C300 /* libplist-2.0.3.dylib */,
 				CC5E54BB2C4E12F900FDE4A8 /* libxar.1.dylib */,
-				03AADE0D2C5168B900DCB836 /* liblzma.5.dylib */,
-				03AADE0E2C5168B900DCB836 /* libmd.0.dylib */,
-				03AADE092C5168B900DCB836 /* libz-ng.2.dylib */,
-				03AADE082C5168B900DCB836 /* libzstd.1.dylib */,
 				CCF4706B2C4A4919008D8197 /* Localizable.strings */,
+				CC3485142C71B219007E0E28 /* TrollFools.entitlements */,
+				CC3485152C71B219007E0E28 /* Version.xcconfig */,
+				CC3485162C71B219007E0E28 /* Version.Debug.xcconfig */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -200,14 +208,14 @@
 		CCF470582C4A4649008D8197 /* TrollFools */ = {
 			isa = PBXGroup;
 			children = (
-				030DECFD2C53F04F00D5FEBB /* Info.plist */,
+				03375E612C95ACA70024C95D /* Info.plist */,
 				CCF5A0A12C4D417F0097D48D /* main.swift */,
 				CCF470592C4A4649008D8197 /* TrollFoolsApp.swift */,
 				CCF4706D2C4A4BAB008D8197 /* AppListView.swift */,
 				CCB6A1182C4A58C7000D75B0 /* OptionView.swift */,
+				CC19E4BA2C561D7300E0F1B5 /* SettingsView.swift */,
 				CCB6A11A2C4A6066000D75B0 /* InjectView.swift */,
 				CC15490D2C4B80AF00A4173E /* EjectListView.swift */,
-				03B9742A2C56659000C750AD /* SettingsView.swift */,
 				CC1548D22C4A743200A4173E /* SuccessView.swift */,
 				CC1548D42C4A744300A4173E /* FailureView.swift */,
 				CC1548D62C4A768700A4173E /* Injector.swift */,
@@ -240,12 +248,12 @@
 			);
 			name = TrollFools;
 			packageProductDependencies = (
-				CC1548C82C4A6B2100A4173E /* ZIPFoundation */,
-				CC1548FB2C4AADBB00A4173E /* MachOKit */,
-				CC1548FD2C4AADBB00A4173E /* MachOKitC */,
-				CCF5A09B2C4D40830097D48D /* CocoaLumberjack */,
-				CCF5A09D2C4D40830097D48D /* CocoaLumberjackSwift */,
-				CCF5A09F2C4D40830097D48D /* CocoaLumberjackSwiftLogBackend */,
+				03375E372C959D8B0024C95D /* MachOKit */,
+				03375E392C959D8B0024C95D /* MachOKitC */,
+				03375E3E2C959ECE0024C95D /* ZIPFoundation */,
+				03375E412C959F1A0024C95D /* CocoaLumberjack */,
+				03375E432C959F1A0024C95D /* CocoaLumberjackSwift */,
+				03375E452C959F1A0024C95D /* CocoaLumberjackSwiftLogBackend */,
 			);
 			productName = TrollFools;
 			productReference = CCF470562C4A4649008D8197 /* TrollFools.app */;
@@ -278,9 +286,9 @@
 			);
 			mainGroup = CCF4704D2C4A4649008D8197;
 			packageReferences = (
-				CC1548C72C4A6B2100A4173E /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
-				CC1548FA2C4AADBB00A4173E /* XCRemoteSwiftPackageReference "MachOKit" */,
-				CCF5A09A2C4D40830097D48D /* XCRemoteSwiftPackageReference "CocoaLumberjack" */,
+				03375E362C959D8B0024C95D /* XCRemoteSwiftPackageReference "MachOKit" */,
+				03375E3D2C959ECE0024C95D /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
+				03375E402C959F1A0024C95D /* XCRemoteSwiftPackageReference "CocoaLumberjack" */,
 			);
 			productRefGroup = CCF470572C4A4649008D8197 /* Products */;
 			projectDirPath = "";
@@ -296,36 +304,38 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03AADE182C5168EF00DCB836 /* liblzma.5.dylib in Resources */,
-				03AADE192C5168EF00DCB836 /* libmd.0.dylib in Resources */,
-				03AADE1A2C5168EF00DCB836 /* libz-ng.2.dylib in Resources */,
-				03AADE1B2C5168EF00DCB836 /* libzstd.1.dylib in Resources */,
+				03375E5D2C95A19A0024C95D /* liblzma.5.dylib in Resources */,
+				03375E5E2C95A19A0024C95D /* libmd.0.dylib in Resources */,
+				03375E5F2C95A19A0024C95D /* libz-ng.2.dylib in Resources */,
+				03375E602C95A19A0024C95D /* libzstd.1.dylib in Resources */,
 				CCF925442C4CE47800880D48 /* chown in Resources */,
-				0313B2A62C51AE4C000E5511 /* ar in Resources */,
 				CC1548E12C4A963500A4173E /* cp in Resources */,
+				03375E512C95A1160024C95D /* tar in Resources */,
 				CC1549022C4B62E300A4173E /* cp-15 in Resources */,
 				CC1548D12C4A6B8200A4173E /* ct_bypass in Resources */,
-				03AADE142C5168B900DCB836 /* gzip in Resources */,
 				CCFC78642C4E853D008EB25D /* mkdir in Resources */,
+				03375E502C95A1160024C95D /* ar in Resources */,
+				CCECB7CE2C54DC660094C8E6 /* mv in Resources */,
+				03375E522C95A1160024C95D /* xz in Resources */,
+				CC0E80FB2C54F84000B137B4 /* mv-15 in Resources */,
+				03375E492C95A0BB0024C95D /* composedeb-15 in Resources */,
 				CC1549002C4AB43600A4173E /* rm in Resources */,
 				CC1548DD2C4A8DC500A4173E /* insert_dylib in Resources */,
-				03942CF22C51EC5B0061A208 /* lzma in Resources */,
+				03375E542C95A1160024C95D /* lzma in Resources */,
 				CC5E54BE2C4E12F900FDE4A8 /* install_name_tool in Resources */,
+				03375E4A2C95A0BB0024C95D /* composedeb in Resources */,
 				CCC564EB2C4BE8320097C300 /* ldid in Resources */,
 				CC15490C2C4B79D800A4173E /* optool in Resources */,
-				03AADE122C5168B900DCB836 /* xz in Resources */,
 				CCC564EC2C4BE8470097C300 /* libcrypto.3.dylib in Resources */,
+				03375E532C95A1160024C95D /* gzip in Resources */,
 				CC1548E62C4A974E00A4173E /* libintl.8.dylib in Resources */,
-				03942CEF2C51CAB90061A208 /* composedeb in Resources */,
+				CC3485172C71B219007E0E28 /* Version.xcconfig in Resources */,
 				CC1548E72C4A974E00A4173E /* libiosexec.1.dylib in Resources */,
-				03AADE132C5168B900DCB836 /* tar in Resources */,
 				CCC564ED2C4BE8470097C300 /* libplist-2.0.3.dylib in Resources */,
 				CC5E54BF2C4E131000FDE4A8 /* libxar.1.dylib in Resources */,
-				03B9742E2C56720100C750AD /* mv in Resources */,
 				CC61A87C2C4A677B003BD9A0 /* CydiaSubstrate.framework.zip in Resources */,
 				CCF4705E2C4A464B008D8197 /* Assets.xcassets in Resources */,
-				03942CF02C51CAB90061A208 /* composedeb-15 in Resources */,
-				03B9742F2C56720100C750AD /* mv-15 in Resources */,
+				CC3485182C71B219007E0E28 /* Version.Debug.xcconfig in Resources */,
 				CCF470692C4A4919008D8197 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -344,7 +354,7 @@
 				CC1548DB2C4A7C7000A4173E /* Execute.swift in Sources */,
 				CCF5A0A42C4D45160097D48D /* AuxiliaryExecute.swift in Sources */,
 				CCF4705A2C4A4649008D8197 /* TrollFoolsApp.swift in Sources */,
-				03B9742B2C56659000C750AD /* SettingsView.swift in Sources */,
+				CC19E4BB2C561D7300E0F1B5 /* SettingsView.swift in Sources */,
 				CC1548D72C4A768700A4173E /* Injector.swift in Sources */,
 				CCB6A1192C4A58C7000D75B0 /* OptionView.swift in Sources */,
 				CCF5A0A22C4D417F0097D48D /* main.swift in Sources */,
@@ -492,14 +502,15 @@
 		};
 		CCF470652C4A464B008D8197 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CC3485162C71B219007E0E28 /* Version.Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = 6LMF23FAGL;
+				CURRENT_PROJECT_VERSION = $DEBUG_BUILD_NUMBER;
+				DEVELOPMENT_TEAM = Q6GZT6G9SB;
 				ENABLE_PREVIEWS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TrollFools/Info.plist;
@@ -519,7 +530,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/TrollFools",
 				);
-				MARKETING_VERSION = 2.5;
+				MARKETING_VERSION = $DEBUG_VERSION;
 				PRODUCT_BUNDLE_IDENTIFIER = com.huami.TrollFools;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -536,14 +547,15 @@
 		};
 		CCF470662C4A464B008D8197 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CC3485152C71B219007E0E28 /* Version.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = 6LMF23FAGL;
+				CURRENT_PROJECT_VERSION = $BUILD_NUMBER;
+				DEVELOPMENT_TEAM = Q6GZT6G9SB;
 				ENABLE_PREVIEWS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TrollFools/Info.plist;
@@ -563,7 +575,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/TrollFools",
 				);
-				MARKETING_VERSION = 2.5;
+				MARKETING_VERSION = $VERSION;
 				PRODUCT_BUNDLE_IDENTIFIER = com.huami.TrollFools;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -601,7 +613,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CC1548C72C4A6B2100A4173E /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+		03375E362C959D8B0024C95D /* XCRemoteSwiftPackageReference "MachOKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/p-x9/MachOKit.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		03375E3D2C959ECE0024C95D /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/weichsel/ZIPFoundation.git";
 			requirement = {
@@ -609,15 +629,7 @@
 				minimumVersion = 0.9.19;
 			};
 		};
-		CC1548FA2C4AADBB00A4173E /* XCRemoteSwiftPackageReference "MachOKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/p-x9/MachOKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.19.0;
-			};
-		};
-		CCF5A09A2C4D40830097D48D /* XCRemoteSwiftPackageReference "CocoaLumberjack" */ = {
+		03375E402C959F1A0024C95D /* XCRemoteSwiftPackageReference "CocoaLumberjack" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/CocoaLumberjack/CocoaLumberjack.git";
 			requirement = {
@@ -628,34 +640,34 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CC1548C82C4A6B2100A4173E /* ZIPFoundation */ = {
+		03375E372C959D8B0024C95D /* MachOKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CC1548C72C4A6B2100A4173E /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
-			productName = ZIPFoundation;
-		};
-		CC1548FB2C4AADBB00A4173E /* MachOKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CC1548FA2C4AADBB00A4173E /* XCRemoteSwiftPackageReference "MachOKit" */;
+			package = 03375E362C959D8B0024C95D /* XCRemoteSwiftPackageReference "MachOKit" */;
 			productName = MachOKit;
 		};
-		CC1548FD2C4AADBB00A4173E /* MachOKitC */ = {
+		03375E392C959D8B0024C95D /* MachOKitC */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CC1548FA2C4AADBB00A4173E /* XCRemoteSwiftPackageReference "MachOKit" */;
+			package = 03375E362C959D8B0024C95D /* XCRemoteSwiftPackageReference "MachOKit" */;
 			productName = MachOKitC;
 		};
-		CCF5A09B2C4D40830097D48D /* CocoaLumberjack */ = {
+		03375E3E2C959ECE0024C95D /* ZIPFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CCF5A09A2C4D40830097D48D /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
+			package = 03375E3D2C959ECE0024C95D /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
+		};
+		03375E412C959F1A0024C95D /* CocoaLumberjack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03375E402C959F1A0024C95D /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
 			productName = CocoaLumberjack;
 		};
-		CCF5A09D2C4D40830097D48D /* CocoaLumberjackSwift */ = {
+		03375E432C959F1A0024C95D /* CocoaLumberjackSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CCF5A09A2C4D40830097D48D /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
+			package = 03375E402C959F1A0024C95D /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
 			productName = CocoaLumberjackSwift;
 		};
-		CCF5A09F2C4D40830097D48D /* CocoaLumberjackSwiftLogBackend */ = {
+		03375E452C959F1A0024C95D /* CocoaLumberjackSwiftLogBackend */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CCF5A09A2C4D40830097D48D /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
+			package = 03375E402C959F1A0024C95D /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
 			productName = CocoaLumberjackSwiftLogBackend;
 		};
 /* End XCSwiftPackageProductDependency section */
