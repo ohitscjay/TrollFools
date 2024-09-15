@@ -88,6 +88,15 @@ final class AppListModel: ObservableObject {
 
     @Published var isRebuildNeeded: Bool = false
     @Published var isRebuilding: Bool = false
+    @Published var selectedFilter: Filter = .all
+
+
+    enum Filter: String, CaseIterable {
+        case all = "AllApps"
+        case user = "UserApps"
+        case troll = "TrollApps"
+        case system = "SysApps"
+    }
 
     private let applicationChanged = PassthroughSubject<Void, Never>()
     private var cancellables = Set<AnyCancellable>()
@@ -148,9 +157,20 @@ final class AppListModel: ObservableObject {
         if filter.showPatchedOnly {
             filteredApplications = filteredApplications.filter { $0.isInjected }
         }
-        
+
+        switch selectedFilter {
+        case .all:
+            break
+        case .user:
+            filteredApplications = filteredApplications.filter { $0.isUser }
+        case .troll:
+            filteredApplications = filteredApplications.filter { $0.isFromTroll }
+        case .system:
+            filteredApplications = filteredApplications.filter { $0.isFromApple }
+        }
+
         filteredApplications.sort { sortOrder == .ascending ? $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending : $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedDescending }
-        
+
         userApplications = filteredApplications.filter { $0.isUser }
         trollApplications = filteredApplications.filter { $0.isFromTroll }
         appleApplications = filteredApplications.filter { $0.isFromApple }
@@ -418,10 +438,13 @@ struct AppListCell: View {
 struct AppListView: View {
     @StateObject var vm = AppListModel.shared
     @State private var isUsingOfficialIcon = false
-
+    @State private var showSearchBar = false
+    @State private var searchText: String = ""
     @State var isErrorOccurred: Bool = false
     @State var errorMessage: String = ""
-
+    
+    let filters: [AppListModel.Filter] = AppListModel.Filter.allCases
+    
     var appNameString: String {
         Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "TrollFools"
     }
@@ -460,7 +483,7 @@ struct AppListView: View {
             }
         }
     }
-
+    
     var appListFooter: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(appString)
@@ -523,28 +546,8 @@ struct AppListView: View {
 
             Section {
                 filteredAppList(vm.userApplications)
-            } header: {
-                Text(NSLocalizedString("User Applications", comment: ""))
-                    .font(.footnote)
-            } footer: {
-                if !vm.filter.isSearching && !vm.filter.showPatchedOnly && vm.unsupportedCount > 0 {
-                    Text(String(format: NSLocalizedString("And %d more unsupported user applications.", comment: ""), vm.unsupportedCount))
-                        .font(.footnote)
-                }
-            }
-
-            Section {
                 filteredAppList(vm.trollApplications)
-            } header: {
-                Text(NSLocalizedString("TrollStore Applications", comment: ""))
-                    .font(.footnote)
-            }
-
-            Section {
                 filteredAppList(vm.appleApplications)
-            } header: {
-                Text(NSLocalizedString("Injectable System Applications", comment: ""))
-                    .font(.footnote)
             } footer: {
                 if !vm.filter.isSearching {
                     VStack(alignment: .leading, spacing: 20) {
@@ -587,7 +590,7 @@ struct AppListView: View {
                         Text(isUsingOfficialIcon ? NSLocalizedString("Switch to Default Icon", comment: "") : NSLocalizedString("Switch to Official Icon", comment: ""))
                     }
                 } label: {
-                    Image(systemName: "arrow.up.arrow.down.square")
+                    Image(systemName: "arrow.up.arrow.down.circle")
                 }
                 .accessibilityLabel(NSLocalizedString("Sort Order", comment: ""))
             }
@@ -602,6 +605,7 @@ struct AppListView: View {
                 }
                 .accessibilityLabel(NSLocalizedString("Show Patched Only", comment: ""))
             }
+            
         }
         .onChange(of: vm.sortOrder) { _ in
             vm.performFilter()
@@ -633,28 +637,97 @@ struct AppListView: View {
 
     var body: some View {
         NavigationView {
-            if #available(iOS 15.0, *) {
-                appList
-                    .refreshable {
-                        withAnimation {
-                            vm.reload()
+            VStack {
+                Picker("", selection: $vm.selectedFilter) {
+                    Text(NSLocalizedString("All", comment: "")).tag(AppListModel.Filter.all)
+                    Text(NSLocalizedString("User", comment: "")).tag(AppListModel.Filter.user)
+                    Text(NSLocalizedString("Troll", comment: "")).tag(AppListModel.Filter.troll)
+                    Text(NSLocalizedString("System", comment: "")).tag(AppListModel.Filter.system)
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .onChange(of: vm.selectedFilter) { newValue in
+                    withAnimation {
+                        vm.performFilter()
+                    }
+                }
+                .gesture(
+                    DragGesture().onEnded { value in
+                        if value.translation.width < 0 {
+                            goToNextFilter()
+                        } else if value.translation.width > 0 {
+                            goToPreviousFilter()
                         }
                     }
-                    .searchable(
-                        text: $vm.filter.searchKeyword,
-                        placement: .automatic,
-                        prompt: (vm.filter.showPatchedOnly
-                                 ? NSLocalizedString("Search Patched…", comment: "")
-                                 : NSLocalizedString("Search…", comment: ""))
+                )
+                
+                if #available(iOS 15.0, *) {
+                    appList
+                        .refreshable {
+                            withAnimation {
+                                vm.reload()
+                            }
+                        }
+                        .gesture(
+                        DragGesture().onEnded { value in
+                            if value.translation.width < 0 {
+                                goToNextFilter()
+                            } else if value.translation.width > 0 {
+                                goToPreviousFilter()
+                            }
+                        }
                     )
-                    .textInputAutocapitalization(.never)
-            } else {
-                // Fallback on earlier versions
-                appList
+                        .searchable(
+                            text: $vm.filter.searchKeyword,
+                            placement: .automatic,
+                            prompt: (vm.filter.showPatchedOnly
+                                     ? NSLocalizedString("Search Patched…", comment: "")
+                                     : NSLocalizedString("Search…", comment: ""))
+                        )
+                        .textInputAutocapitalization(.never)
+                        .navigationTitle("Applications")
+                } else {
+                    TextField(NSLocalizedString("Search...", comment: ""), text: $searchText)
+                        .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(4)
+                        .padding(.horizontal)
+
+                    appList
+                        .onAppear {
+                            vm.filter.searchKeyword = searchText
+                        }
+                        .onChange(of: searchText) { newValue in
+                            vm.filter.searchKeyword = newValue
+                            vm.performFilter()
+                        }
+                        .gesture(
+                        DragGesture().onEnded { value in
+                            if value.translation.width < 0 {
+                                goToNextFilter()
+                            } else if value.translation.width > 0 {
+                                goToPreviousFilter()
+                            }
+                        }
+                    )
+                }
             }
         }
     }
+    
+    private func goToNextFilter() {
+        if let currentIndex = filters.firstIndex(of: vm.selectedFilter), currentIndex < filters.count - 1 {
+            vm.selectedFilter = filters[currentIndex + 1]
+        }
+    }
 
+    private func goToPreviousFilter() {
+        if let currentIndex = filters.firstIndex(of: vm.selectedFilter), currentIndex > 0 {
+            vm.selectedFilter = filters[currentIndex - 1]
+        }
+    }
+    
     private func rebuildIconCache() {
         withAnimation {
             vm.isRebuilding = true
