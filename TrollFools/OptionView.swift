@@ -55,87 +55,97 @@ private struct OptionCell: View {
 
 struct OptionView: View {
     let app: App
-
+    let fPath: String
+    
     @State var isImporterPresented = false
     @State var isImporterSelected = false
-
+    
     @State var isSettingsPresented = false
-
+    
     @State var importerResult: Result<[URL], any Error>?
-
-    init(_ app: App) {
+    
+    init(_ app: App, _ fPath: String) {
         self.app = app
+        self.fPath = fPath
     }
-
+    
+    
     var body: some View {
-        VStack(spacing: 80) {
-            HStack {
-                Spacer()
-
-                Button {
-                    isImporterPresented = true
-                } label: {
-                    OptionCell(option: .attach)
-                }
-                .accessibilityLabel(NSLocalizedString("Inject", comment: ""))
-
-                Spacer()
-
-                NavigationLink {
-                    EjectListView(app)
-                } label: {
-                    OptionCell(option: .detach)
-                }
-                .accessibilityLabel(NSLocalizedString("Eject", comment: ""))
-
-                Spacer()
-            }
-
-            Button {
-                isSettingsPresented = true
-            } label: {
-                Label(NSLocalizedString("Advanced Settings", comment: ""),
-                      systemImage: "gear")
-            }
-        }
-        .padding()
-        .navigationTitle(app.name)
-        .background(Group {
-            NavigationLink(isActive: $isImporterSelected) {
-                if let result = importerResult {
-                    switch result {
-                    case .success(let urls):
-                        InjectView(app: app, urlList: urls
-                            .sorted(by: { $0.lastPathComponent < $1.lastPathComponent }))
-                    case .failure(let message):
-                        FailureView(title: NSLocalizedString("Error", comment: ""),
-                                    message: message.localizedDescription)
+        if !fPath.isEmpty {
+            let stringUrls: [String] = [fPath]
+            let urlss: [URL] = stringUrls.compactMap { URL(fileURLWithPath: $0) }
+            InjectView(app: app, urlList: urlss
+                .sorted(by: { $0.lastPathComponent < $1.lastPathComponent }))
+        }else {
+            VStack(spacing: 80) {
+                HStack {
+                    Spacer()
+                    
+                    Button {
+                        isImporterPresented = true
+                    } label: {
+                        OptionCell(option: .attach)
                     }
+                    .accessibilityLabel(NSLocalizedString("Inject", comment: ""))
+                    
+                    Spacer()
+                    
+                    NavigationLink {
+                        EjectListView(app)
+                    } label: {
+                        OptionCell(option: .detach)
+                    }
+                    .accessibilityLabel(NSLocalizedString("Eject", comment: ""))
+                    
+                    Spacer()
                 }
-            } label: { }
-        })
-        .fileImporter(
-            isPresented: $isImporterPresented,
-            allowedContentTypes: [
-                .init(filenameExtension: "dylib")!,
-                .bundle,
-                .framework,
-                .package,
-                .zip,
-                .init(filenameExtension: "deb")!,
-            ],
-            allowsMultipleSelection: true
-        ) {
-            result in
-            importerResult = result
-            isImporterSelected = true
-        }
-        .sheet(isPresented: $isSettingsPresented) {
-            if #available(iOS 16.0, *) {
-                SettingsView(app)
-                    .presentationDetents([.medium, .large])
-            } else {
-                SettingsView(app)
+                
+                Button {
+                    isSettingsPresented = true
+                } label: {
+                    Label(NSLocalizedString("Advanced Settings", comment: ""),
+                          systemImage: "gear")
+                }
+            }
+            .padding()
+            .navigationTitle(app.name)
+            .background(Group {
+                NavigationLink(isActive: $isImporterSelected) {
+                    if let result = importerResult {
+                        switch result {
+                        case .success(let urls):
+                            InjectView(app: app, urlList: urls
+                                .sorted(by: { $0.lastPathComponent < $1.lastPathComponent }))
+                        case .failure(let message):
+                            FailureView(title: NSLocalizedString("Error", comment: ""),
+                                        message: message.localizedDescription)
+                        }
+                    }
+                } label: { }
+            })
+            .fileImporter(
+                isPresented: $isImporterPresented,
+                allowedContentTypes: [
+                    .init(filenameExtension: "dylib")!,
+                    .bundle,
+                    .framework,
+                    .package,
+                    .zip,
+                    .init(filenameExtension: "deb")!,
+                ],
+                allowsMultipleSelection: true
+            ) {
+                result in
+                importerResult = result
+                isImporterSelected = true
+            }
+            .sheet(isPresented: $isSettingsPresented) {
+                if #available(iOS 16.0, *) {
+                    SettingsView(app)
+                        .presentationDetents([.medium, .large])
+                } else {
+                    SettingsView(app)
+                }
             }
         }
     }

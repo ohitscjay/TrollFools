@@ -163,3 +163,24 @@
 
 /* No comment provided by engineer. */
 "System" = "Sysytem";
+
+/* No comment provided by engineer. */
+"Notification" = "Notification";
+
+/* No comment provided by engineer. */
+"Clear Cache" = "Clear Cache";
+
+/* No comment provided by engineer. */
+"Clear Done" = "Clear Done";
+
+/* No comment provided by engineer. */
+"You imported a file" = "You imported a file";
+
+/* No comment provided by engineer. */
+"What would you like to do?\nSelect 'Inject' to choose the app for injection.\nSelect 'Do Nothing' to cancel." = "What would you like to do?\nSelect 'Inject' to choose the app for injection.\nSelect 'Do Nothing' to cancel.";
+
+/* No comment provided by engineer. */
+"Inject" = "Inject";
+
+/* No comment provided by engineer. */
+"Do Nothing" = "Do Nothing";

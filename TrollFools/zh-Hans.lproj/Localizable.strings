@@ -165,3 +165,22 @@
 
 /* No comment provided by engineer. */
 "System" = "系统应用";
+/* No comment provided by engineer. */
+"Notification" = "通知";
+
+/* No comment provided by engineer. */
+"Clear Cache" = "清除缓存";
+
+/* No comment provided by engineer. */
+"Clear Done" = "清除完成";
+
+"You imported a file" = "您导入了一个文件";
+
+/* No comment provided by engineer. */
+"What would you like to do?\nSelect 'Inject' to choose the app for injection.\nSelect 'Do Nothing' to cancel." = "您想做什么？\n选择“注入”以选择要注入的应用。\n选择“什么都不做”以取消。";
+
+/* No comment provided by engineer. */
+"Inject" = "注入";
+
+/* No comment provided by engineer. */
+"Do Nothing" = "什么都不做";

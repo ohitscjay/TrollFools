@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0303FD272CA7E8230092B8B8 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0303FD262CA7E8230092B8B8 /* Action.swift */; };
 		03375E382C959D8B0024C95D /* MachOKit in Frameworks */ = {isa = PBXBuildFile; productRef = 03375E372C959D8B0024C95D /* MachOKit */; };
 		03375E3A2C959D8B0024C95D /* MachOKitC in Frameworks */ = {isa = PBXBuildFile; productRef = 03375E392C959D8B0024C95D /* MachOKitC */; };
 		03375E3F2C959ECE0024C95D /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 03375E3E2C959ECE0024C95D /* ZIPFoundation */; };
@@ -64,6 +65,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0303FD262CA7E8230092B8B8 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		03327EA32CA5737800E3490A /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		03375E472C95A0BB0024C95D /* composedeb-15 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "composedeb-15"; sourceTree = "<group>"; };
 		03375E482C95A0BB0024C95D /* composedeb */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = composedeb; sourceTree = "<group>"; };
 		03375E4B2C95A1160024C95D /* ar */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ar; sourceTree = "<group>"; };
@@ -76,6 +79,7 @@
 		03375E572C95A1850024C95D /* libzstd.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libzstd.1.dylib; sourceTree = "<group>"; };
 		03375E582C95A1850024C95D /* liblzma.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = liblzma.5.dylib; sourceTree = "<group>"; };
 		03375E612C95ACA70024C95D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		039496022CA5876A00479713 /* TrollFools.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = TrollFools.entitlements; path = TrollFools/TrollFools.entitlements; sourceTree = SOURCE_ROOT; };
 		CC0E80FA2C54F84000B137B4 /* mv-15 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "mv-15"; sourceTree = "<group>"; };
 		CC1548CF2C4A6B8200A4173E /* ct_bypass */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ct_bypass; sourceTree = "<group>"; };
 		CC1548D22C4A743200A4173E /* SuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessView.swift; sourceTree = "<group>"; };
@@ -91,7 +95,6 @@
 		CC15490B2C4B79D800A4173E /* optool */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = optool; sourceTree = "<group>"; };
 		CC15490D2C4B80AF00A4173E /* EjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EjectListView.swift; sourceTree = "<group>"; };
 		CC19E4BA2C561D7300E0F1B5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		CC3485142C71B219007E0E28 /* TrollFools.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = TrollFools.entitlements; sourceTree = "<group>"; };
 		CC3485152C71B219007E0E28 /* Version.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Version.xcconfig; sourceTree = "<group>"; };
 		CC3485162C71B219007E0E28 /* Version.Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Version.Debug.xcconfig; sourceTree = "<group>"; };
 		CC5E54BB2C4E12F900FDE4A8 /* libxar.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libxar.1.dylib; sourceTree = "<group>"; };
@@ -173,7 +176,6 @@
 				CCC564E72C4BE8320097C300 /* libplist-2.0.3.dylib */,
 				CC5E54BB2C4E12F900FDE4A8 /* libxar.1.dylib */,
 				CCF4706B2C4A4919008D8197 /* Localizable.strings */,
-				CC3485142C71B219007E0E28 /* TrollFools.entitlements */,
 				CC3485152C71B219007E0E28 /* Version.xcconfig */,
 				CC3485162C71B219007E0E28 /* Version.Debug.xcconfig */,
 			);
@@ -196,6 +198,7 @@
 				CCB6A1152C4A540E000D75B0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		CCF470572C4A4649008D8197 /* Products */ = {
 			isa = PBXGroup;
@@ -211,6 +214,7 @@
 				03375E612C95ACA70024C95D /* Info.plist */,
 				CCF5A0A12C4D417F0097D48D /* main.swift */,
 				CCF470592C4A4649008D8197 /* TrollFoolsApp.swift */,
+				0303FD262CA7E8230092B8B8 /* Action.swift */,
 				CCF4706D2C4A4BAB008D8197 /* AppListView.swift */,
 				CCB6A1182C4A58C7000D75B0 /* OptionView.swift */,
 				CC19E4BA2C561D7300E0F1B5 /* SettingsView.swift */,
@@ -226,6 +230,7 @@
 				CCF925412C4C1B6F00880D48 /* LSApplicationWorkspace.h */,
 				CCF470722C4A4E81008D8197 /* TrollFoolsStub.m */,
 				CCF470712C4A4E81008D8197 /* TrollFools-Bridging-Header.h */,
+				039496022CA5876A00479713 /* TrollFools.entitlements */,
 				CC15490F2C4B84DD00A4173E /* Resources */,
 			);
 			path = TrollFools;
@@ -283,6 +288,7 @@
 				en,
 				Base,
 				"zh-Hans",
+				vi,
 			);
 			mainGroup = CCF4704D2C4A4649008D8197;
 			packageReferences = (
@@ -360,6 +366,7 @@
 				CCF5A0A22C4D417F0097D48D /* main.swift in Sources */,
 				CCF4706E2C4A4BAB008D8197 /* AppListView.swift in Sources */,
 				CC1548D32C4A743200A4173E /* SuccessView.swift in Sources */,
+				0303FD272CA7E8230092B8B8 /* Action.swift in Sources */,
 				CC1548D52C4A744300A4173E /* FailureView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,6 +379,7 @@
 			children = (
 				CCF4706A2C4A4919008D8197 /* en */,
 				CCF4706C2C4A491B008D8197 /* zh-Hans */,
+				03327EA32CA5737800E3490A /* vi */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -509,7 +517,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2024915;
+				CURRENT_PROJECT_VERSION = 240928;
 				DEVELOPMENT_TEAM = Q6GZT6G9SB;
 				ENABLE_PREVIEWS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -521,6 +529,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -554,7 +563,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = Q6GZT6G9SB;
 				ENABLE_PREVIEWS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -566,6 +575,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

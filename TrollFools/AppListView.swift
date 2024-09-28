@@ -306,7 +306,7 @@ struct AppListCell: View {
             if app.isDetached {
                 Button {
                     do {
-                        let injector = try Injector(app.url, appID: app.id, teamID: app.teamID)
+                        let injector = try Injector(app.url, appID: app.id, teamID: app.teamID)//MARK
                         try injector.setDetached(false)
                         withAnimation {
                             app.reload()
@@ -442,8 +442,13 @@ struct AppListView: View {
     @State private var searchText: String = ""
     @State var isErrorOccurred: Bool = false
     @State var errorMessage: String = ""
+    @State private var showTAlert = false
+    @State var inputPath: String = ""
+    @State private var receivedURL: URL?
+
     
     let filters: [AppListModel.Filter] = AppListModel.Filter.allCases
+    
     
     var appNameString: String {
         Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "TrollFools"
@@ -464,13 +469,14 @@ struct AppListView: View {
                NSLocalizedString("huami Add some features", comment: ""))
     }
 
-
     let repoURL = URL(string: "https://github.com/Lessica/TrollFools")
 
     func filteredAppList(_ apps: [App]) -> some View {
         ForEach(apps, id: \.id) { app in
             NavigationLink {
-                OptionView(app)
+                OptionView(app, inputPath)
+                .onDisappear {
+                    inputPath = ""                }
             } label: {
                 if #available(iOS 16.0, *) {
                     AppListCell(app: app)
@@ -483,6 +489,7 @@ struct AppListView: View {
             }
         }
     }
+
     
     var appListFooter: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -502,6 +509,7 @@ struct AppListView: View {
     }
 
     var appList: some View {
+        
         List {
             if AppListModel.hasTrollStore && vm.isRebuildNeeded {
                 Section {
@@ -589,12 +597,16 @@ struct AppListView: View {
                     Button(action: toggleAppIcon) {
                         Text(isUsingOfficialIcon ? NSLocalizedString("Switch to Default Icon", comment: "") : NSLocalizedString("Switch to Official Icon", comment: ""))
                     }
+                    Button(action: clearCache) {
+                        Text(NSLocalizedString("Clear Cache", comment: ""))
+                    }
                 } label: {
                     Image(systemName: "arrow.up.arrow.down.circle")
                 }
                 .accessibilityLabel(NSLocalizedString("Sort Order", comment: ""))
+
             }
-            
+
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
                     vm.filter.showPatchedOnly.toggle()
@@ -605,7 +617,6 @@ struct AppListView: View {
                 }
                 .accessibilityLabel(NSLocalizedString("Show Patched Only", comment: ""))
             }
-            
         }
         .onChange(of: vm.sortOrder) { _ in
             vm.performFilter()
@@ -615,7 +626,46 @@ struct AppListView: View {
             checkCurrentIcon()
         }
     }
+    private func clearCache() {
+        let fileManager = FileManager.default
+        
+        let tmpURL = fileManager.temporaryDirectory
+        do {
+            let tmpContents = try fileManager.contentsOfDirectory(at: tmpURL, includingPropertiesForKeys: nil)
+            for file in tmpContents {
+                try fileManager.removeItem(at: file)
+            }
+        } catch {}
 
+        let inboxURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("Inbox")
+        do {
+            let inboxContents = try fileManager.contentsOfDirectory(at: inboxURL, includingPropertiesForKeys: nil)
+            for file in inboxContents {
+                try fileManager.removeItem(at: file)
+            }
+        } catch {}
+
+        let cachesDirectory = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first!
+        do {
+            let cacheContents = try fileManager.contentsOfDirectory(at: cachesDirectory, includingPropertiesForKeys: nil)
+            for file in cacheContents {
+                try fileManager.removeItem(at: file)
+            }
+        } catch {}
+
+        let alertTitle = NSLocalizedString("Notification", comment: "")
+        let alertMessage = NSLocalizedString("Clear Done", comment: "")
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
+        
+        DispatchQueue.main.async {
+            if let topController = UIApplication.shared.windows.first?.rootViewController {
+                topController.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+
+    
     private func toggleAppIcon() {
         let newIcon = isUsingOfficialIcon ? nil : "AppIcon-official"
 
@@ -670,14 +720,14 @@ struct AppListView: View {
                             }
                         }
                         .gesture(
-                        DragGesture().onEnded { value in
-                            if value.translation.width < 0 {
-                                goToNextFilter()
-                            } else if value.translation.width > 0 {
-                                goToPreviousFilter()
+                            DragGesture().onEnded { value in
+                                if value.translation.width < 0 {
+                                    goToNextFilter()
+                                } else if value.translation.width > 0 {
+                                    goToPreviousFilter()
+                                }
                             }
-                        }
-                    )
+                        )
                         .searchable(
                             text: $vm.filter.searchKeyword,
                             placement: .automatic,
@@ -686,6 +736,7 @@ struct AppListView: View {
                                      : NSLocalizedString("Search…", comment: ""))
                         )
                         .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled(true)
                         .navigationTitle("Applications")
                 } else {
                     TextField(NSLocalizedString("Search...", comment: ""), text: $searchText)
@@ -693,7 +744,7 @@ struct AppListView: View {
                         .background(Color(.systemGray6))
                         .cornerRadius(4)
                         .padding(.horizontal)
-
+                    
                     appList
                         .onAppear {
                             vm.filter.searchKeyword = searchText
@@ -703,16 +754,45 @@ struct AppListView: View {
                             vm.performFilter()
                         }
                         .gesture(
-                        DragGesture().onEnded { value in
-                            if value.translation.width < 0 {
-                                goToNextFilter()
-                            } else if value.translation.width > 0 {
-                                goToPreviousFilter()
+                            DragGesture().onEnded { value in
+                                if value.translation.width < 0 {
+                                    goToNextFilter()
+                                } else if value.translation.width > 0 {
+                                    goToPreviousFilter()
+                                }
                             }
-                        }
-                    )
+                        )
                 }
             }
+        }
+        .onOpenURL { url in
+            if url.isFileURL {
+                if url.pathExtension == "dylib" {
+                    showTAlert = true
+                    receivedURL = url
+                } else {
+                    if url.pathExtension == "deb" {
+                        let cachesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
+                        showTAlert = true
+                        let decomposer = DebDecomposer()
+                        receivedURL = decomposer.decomposeDeb(at: url, to: cachesDirectory)
+                    }
+                }
+            }
+        }
+        .alert(isPresented: $showTAlert) {
+            Alert(
+                title: Text(NSLocalizedString("You imported a file", comment: "")),
+                message: Text(NSLocalizedString("What would you like to do?\nSelect 'Inject' to choose the app for injection.\nSelect 'Do Nothing' to cancel.", comment: "")),
+                primaryButton: .default(Text(NSLocalizedString("Inject", comment: ""))) {
+                    if let path = receivedURL?.path {
+                        inputPath = path
+                    }
+                },
+                secondaryButton: .cancel(Text(NSLocalizedString("Do Nothing", comment: ""))) {
+                    inputPath = ""
+                }
+            )
         }
     }
     
@@ -761,3 +841,10 @@ struct AppListView: View {
         }
     }
 }
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        AppListView()
+    }
+}
+
