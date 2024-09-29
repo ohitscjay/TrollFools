@@ -192,11 +192,12 @@ final class AppListModel: ObservableObject {
                       let url = proxy.bundleURL(),
                       let teamID = proxy.teamID(),
                       let appType = proxy.applicationType(),
-                      let localizedName = proxy.localizedName(),
-                      let dataurl = proxy.dataContainerURL()
+                      let localizedName = proxy.localizedName()
                 else {
                     return nil
                 }
+                
+                
                 
                 if id == "wiki.qaq.trapp" {
                     hasTrollRecorder = true
@@ -211,6 +212,7 @@ final class AppListModel: ObservableObject {
                 }
                 
                 let shortVersionString: String? = proxy.shortVersionString()
+                let dataurl = proxy.dataContainerURL()
                 let app = App(
                     id: id,
                     name: localizedName,
@@ -218,7 +220,7 @@ final class AppListModel: ObservableObject {
                     teamID: teamID,
                     url: url,
                     version: shortVersionString,
-                    dataurl: dataurl
+                    dataurl: (dataurl ?? URL(string: "about:blank"))!
                 )
                 
                 if app.isUser && app.isFromApple {
@@ -337,11 +339,11 @@ struct AppListCell: View {
                     Label(NSLocalizedString("Lock Version", comment: ""), systemImage: "lock")
                 }
             }
-            Button {
-                clearCaches()
-            } label: {
-                Label(NSLocalizedString("Clear Caches", comment: ""), systemImage: "trash")
-            }
+        }
+        Button {
+            clearCaches()
+        } label: {
+            Label(NSLocalizedString("Clear Caches", comment: ""), systemImage: "trash")
         }
     }
     
@@ -443,6 +445,20 @@ struct AppListCell: View {
     private func clearCaches() {
         let fileManager = FileManager.default
 
+        if app.dataurl.absoluteString == "about:blank" {
+            let alertTitle = NSLocalizedString("Notification", comment: "")
+            let alertMessage = NSLocalizedString("Un support.", comment: "")
+            let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
+
+            DispatchQueue.main.async {
+                if let topController = UIApplication.shared.windows.first?.rootViewController {
+                    topController.present(alert, animated: true, completion: nil)
+                }
+            }
+            return
+        }
+
         do {
             let cachesURL = app.dataurl.appendingPathComponent("Library/Caches")
             let tmpURL = app.dataurl.appendingPathComponent("tmp")
@@ -468,9 +484,9 @@ struct AppListCell: View {
                 }
             }
         } catch {
-            // Handle error if needed
         }
     }
+
 
     
     var isFilzaInstalled: Bool { AppListModel.shared.isFilzaInstalled }
