@@ -168,7 +168,7 @@
 "Notification" = "Notification";
 
 /* No comment provided by engineer. */
-"Clear Cache" = "Clear Cache";
+"Clear App Cache" = "Clear App Cache";
 
 /* No comment provided by engineer. */
 "Clear Done" = "Clear Done";
@@ -184,3 +184,9 @@
 
 /* No comment provided by engineer. */
 "Do Nothing" = "Do Nothing";
+
+/* No comment provided by engineer. */
+"Clear Caches" = "Clear Caches";
+
+/* No comment provided by engineer. */
+"This software is an open-source project TrollFools.\nIf you have purchased it, you should understand what this means.\nVisit the project address in the footer for more information.\nModified version by huami.\nChange Lessica to huami1314 to redirect to this project.\nTG: @huamidev\nThis popup will only display once.\nThanks to the original author i_82." = "This software is an open-source project TrollFools.\nIf you have purchased it, you should understand what this means.\nVisit the project address in the footer for more information.\nModified version by huami.\nChange Lessica to huami1314 to redirect to this project.\nTG: @huamidev\nThis popup will only display once.\nThanks to the original author i_82.";

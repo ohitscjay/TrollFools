@@ -8,22 +8,20 @@
 			<key>CFBundleTypeName</key>
 			<string>Deb Package</string>
 			<key>LSHandlerRank</key>
-			<string>Alternate</string>
+			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>public.deb</string>
-				<string>public.data</string>
+				<string>org.debian.deb-archive</string>
 			</array>
 		</dict>
 		<dict>
 			<key>CFBundleTypeName</key>
 			<string>Dylib</string>
 			<key>LSHandlerRank</key>
-			<string>Alternate</string>
+			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>public.dylib</string>
-				<string>public.data</string>
+				<string>com.apple.mach-o-binary</string>
 			</array>
 		</dict>
 	</array>
